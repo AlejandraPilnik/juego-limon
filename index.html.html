@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El crimen del limón de Gan Ner</title>
+<style>
+:root{
+  --bg:#f7f3e8;
+  --card:#fffdf7;
+  --ink:#24221e;
+  --muted:#6f6a5f;
+  --line:#ddd4bf;
+  --accent:#567532;
+  --accent2:#a56d16;
+  --danger:#9d342d;
+  --ok:#2f6f43;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#f3eddc 0,#fbf9f3 38%,#f7f3e8 100%);
+  color:var(--ink);
+}
+.wrap{max-width:760px;margin:auto;padding:18px 14px 80px}
+.top{
+  position:sticky;top:0;z-index:9;
+  margin:0 -14px 16px;padding:10px 14px;
+  background:rgba(247,243,232,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.bar{height:8px;background:#e8e0cf;border-radius:99px;overflow:hidden}
+.bar>div{height:100%;background:var(--accent);width:0%;transition:.35s}
+.toprow{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}
+.pill{border:1px solid var(--line);background:#fffaf0;padding:7px 10px;border-radius:999px;font-size:.9rem}
+button{
+  border:0;border-radius:12px;padding:12px 14px;font-weight:700;font-size:1rem;
+  background:var(--accent);color:white;cursor:pointer;
+}
+button.secondary{background:#ede7d8;color:var(--ink);border:1px solid var(--line)}
+button.danger{background:var(--danger)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px;margin:14px 0;box-shadow:0 8px 28px rgba(74,59,30,.07);
+}
+h1{font-size:1.65rem;line-height:1.15;margin:0 0 10px}
+h2{font-size:1.35rem;margin:0 0 12px}
+h3{font-size:1.08rem;margin:18px 0 8px}
+p{line-height:1.55}
+.small{color:var(--muted);font-size:.93rem}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}
+.name{border:1px solid var(--line);padding:12px;border-radius:13px;background:#fff}
+.inputrow{display:flex;gap:8px;align-items:stretch;margin-top:14px}
+input,select{
+  width:100%;padding:13px 12px;border-radius:12px;border:1px solid #cfc5ad;
+  font-size:1rem;background:white;color:var(--ink)
+}
+.msg{min-height:24px;margin-top:8px;font-weight:650}
+.ok{color:var(--ok)} .bad{color:var(--danger)}
+.clue{
+  border-left:5px solid var(--accent2);background:#fff6dc;
+  padding:12px 14px;border-radius:10px;margin:12px 0;
+}
+.rtl{direction:rtl;text-align:right}
+.hidden{display:none!important}
+.kbd{
+  display:grid;grid-template-columns:repeat(3,56px);gap:7px;justify-content:center;
+  margin:16px 0
+}
+.kbd div{height:50px;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;background:#fff;font-weight:800}
+.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.06em;background:#f2eee4;padding:10px 12px;border-radius:9px}
+.notebook{margin-top:14px}
+.notebook li{margin:7px 0;line-height:1.4}
+.suspects{display:grid;grid-template-columns:1fr;gap:10px}
+.suspect{
+  border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;
+}
+.suspect b{font-size:1.05rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:9px 7px;text-align:left;vertical-align:top}
+html[dir="rtl"] th,html[dir="rtl"] td{text-align:right}
+.quote{padding:12px 14px;border-radius:10px;background:#f2eee4;margin:10px 0}
+.bigemoji{font-size:3rem;text-align:center;margin:12px 0}
+.finish{font-size:1.05rem;text-align:center}
+.confetti{font-size:2rem;letter-spacing:.2em}
+@media(min-width:640px){
+  .suspects{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="toprow">
+      <div class="pill" id="lemons">🍋 12</div>
+      <button class="secondary" id="langBtn" type="button">עברית</button>
+    </div>
+    <div class="bar"><div id="progress"></div></div>
+  </div>
+
+  <section id="stage0" class="card">
+    <h1 data-es="🍋 El crimen del limón de Gan Ner" data-he="🍋 תעלומת הלימון מגן נר"></h1>
+    <p data-es="Durante el viaje desde Ashdod ocurrió un crimen de una gravedad difícil de exagerar: Don Limón fue encontrado completamente exprimido." data-he="במהלך הדרך מאשדוד התרחש פשע שקשה להגזים בחומרתו: מר לימון נמצא סחוט לחלוטין."></p>
+    <p data-es="Tienen que resolver los desafíos, escribir cada respuesta y guardar las pistas. Al final recién recibirán las fichas completas de los sospechosos." data-he="עליכם לפתור את האתגרים, להקליד כל תשובה ולשמור את הרמזים. רק בסוף תקבלו את הפרטים המלאים על החשודים."></p>
+    <p><b data-es="Premio base: 12 limones del árbol." data-he="פרס התחלתי: 12 לימונים מהעץ."></b>
+    <span class="small" data-es="Cada pista opcional cuesta un limón. El honor familiar, en cambio, no tiene precio." data-he="כל רמז עזר עולה לימון אחד. כבוד המשפחה, לעומת זאת, לא יסולא בפז."></span>
+    <p class="small"><b data-es="Nivel: adultos inteligentes que creen que esto va a ser fácil." data-he="רמה: אנשים חכמים שחושבים שזה הולך להיות קל."></b></p>
+    <h3 data-es="Sospechosos" data-he="החשודים"></h3>
+    <div class="names">
+      <div class="name">🌿 Doña Menta / גברת נענע</div>
+      <div class="name">🧂 Doctor Sal / ד"ר מלח</div>
+      <div class="name">🍬 Señor Azúcar / מר סוכר</div>
+      <div class="name">🍊 Capitán Pomelo / קפטן אשכולית</div>
+      <div class="name">🍊 Señora Mandarina / גברת מנדרינה</div>
+      <div class="name">🥤 Profesor Soda / פרופסור סודה</div>
+    </div>
+    <p class="small" data-es="Importante: no intenten adivinar todavía. Las pistas describen características que necesitarán más tarde." data-he="חשוב: אל תנסו לנחש עדיין. הרמזים מתארים מאפיינים שתצטרכו בהמשך."></p>
+    <button onclick="nextStage()" data-es="Empezar la investigación" data-he="מתחילים בחקירה"></button>
+  </section>
+
+  <section id="stage1" class="card hidden">
+    <h2 data-es="1. La contabilidad clandestina" data-he="1. הנהלת החשבונות המחתרתית"></h2>
+    <p data-es="En la libreta de Don Limón, cada símbolo representa un dígito entero distinto entre 1 y 9." data-he="בפנקס של מר לימון כל סמל מייצג ספרה שלמה שונה בין 1 ל־9."></p>
+    <div class="bigemoji">2🍋 + 🥤 = 23<br>🥤 − 👓 = 4<br>🍋 × 👓 − 🥤 = 26</div>
+    <p data-es="El código de la caja fuerte se forma escribiendo, en este orden, los valores de 🍋, 🥤 y 👓, sin signos ni espacios." data-he="קוד הכספת מתקבל מכתיבת הערכים של 🍋, 🥤 ו־👓, בסדר הזה, בלי סימנים ובלי רווחים."></p>
+    <p><b data-es="¿Cuál es el código de tres cifras?" data-he="מהו הקוד בן שלוש הספרות?"></b></p>
+    <div class="inputrow"><input id="a1" inputmode="numeric"><button onclick="check(1)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m1" class="msg"></div>
+    <button class="secondary" onclick="hint(1)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h1" class="clue hidden" data-es="De la segunda ecuación: 🥤 = 👓 + 4. Sustituyan eso en las otras dos." data-he="מהמשוואה השנייה: 🥤 = 👓 + 4. הציבו זאת בשתי המשוואות האחרות."></div>
+  </section>
+
+  <section id="stage2" class="card hidden">
+    <h2 data-es="2. La secuencia que Waze no entiende" data-he="2. הסדרה שגם Waze לא מבינה"></h2>
+    <p data-es="El historial de navegación contiene esta secuencia. No hay ningún número al azar." data-he="בהיסטוריית הניווט נמצאה הסדרה הבאה. אף מספר אינו מקרי."></p>
+    <div class="code">1 – 2 – 6 – 15 – 31 – 56 – ?</div>
+    <p data-es="¿Cuál es el siguiente número?" data-he="מהו המספר הבא?"></p>
+    <div class="inputrow"><input id="a2" inputmode="numeric"><button onclick="check(2)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m2" class="msg"></div>
+    <button class="secondary" onclick="hint(2)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h2" class="clue hidden" data-es="No estudien los números: estudien cuánto se suma cada vez." data-he="אל תסתכלו על המספרים עצמם; בדקו כמה מוסיפים בכל מעבר."></div>
+  </section>
+
+  <section id="stage3" class="card hidden">
+    <h2 data-es="3. Tres testigos, seis atributos" data-he="3. שלושה עדים, שישה מאפיינים"></h2>
+    <p data-es="Ana, Boris y Cora tomaban bebidas diferentes: té, agua y gaseosa. También tienen lateralidades diferentes: uno es diestro, uno zurdo y uno ambidiestro." data-he="אנה, בוריס וקורה שתו משקאות שונים: תה, מים ומשקה מוגז. גם היד הדומיננטית שלהם שונה: אחד ימני, אחד שמאלי ואחד דו־ידי."></p>
+    <div class="quote" data-es="• Boris tomó gaseosa.&#10;• Quien tomó agua es zurdo.&#10;• Ana no es zurda.&#10;• Cora no tomó té.&#10;• Boris no es diestro." data-he="• בוריס שתה משקה מוגז.&#10;• מי ששתה מים הוא שמאלי.&#10;• אנה אינה שמאלית.&#10;• קורה לא שתתה תה.&#10;• בוריס אינו ימני."></div>
+    <p><b data-es="¿Quién es diestro?" data-he="מי ימני?"></b></p>
+    <div class="inputrow"><input id="a3"><button onclick="check(3)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m3" class="msg"></div>
+    <button class="secondary" onclick="hint(3)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h3" class="clue hidden" data-es="Empiecen por las bebidas: Boris ya tiene gaseosa. Cora no puede tener té." data-he="התחילו מהמשקאות: לבוריס כבר יש משקה מוגז. לקורה אין תה."></div>
+  </section>
+
+  <section id="stage4" class="card hidden">
+    <h2 data-es="4. El mensaje desplazado" data-he="4. ההודעה המוזזת"></h2>
+    <p data-es="El técnico determinó que todas las letras del mensaje fueron desplazadas hacia adelante la misma cantidad de lugares." data-he="הטכנאי קבע שכל אות בהודעה הוזזה קדימה באותו מספר מקומות."></p>
+    <p data-es="La clave es la suma de las cifras de la respuesta que obtuvieron en la prueba de Waze. Para descifrar, retrocedan esa cantidad." data-he="המפתח הוא סכום הספרות של התשובה שקיבלתם בחידת Waze. כדי לפענח, זוזו לאחור במספר המקומות הזה."></p>
+    <div id="alphabet" class="code"></div>
+    <p><b data-es="Mensaje interceptado:" data-he="הודעה שיורטה:"></b></p>
+    <div id="caesar" class="code"></div>
+    <p data-es="Escriban la palabra descifrada." data-he="הקלידו את המילה שפענחתם."></p>
+    <div class="inputrow"><input id="a4"><button onclick="check(4)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m4" class="msg"></div>
+    <button class="secondary" onclick="hint(4)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h4" class="clue hidden" data-es="La respuesta anterior era 92: 9+2=11. Retrocedan 11 letras, con vuelta al principio del alfabeto cuando sea necesario." data-he="התשובה הקודמת הייתה 92: ‏9+2=11. זוזו 11 אותיות לאחור, וחזרו לסוף האלפבית כשצריך."></div>
+  </section>
+
+  <section id="stage5" class="card hidden">
+    <h2 data-es="5. La cuadrícula del laboratorio" data-he="5. טבלת המעבדה"></h2>
+    <p data-es="En un objeto aparecieron pares de números. El laboratorio cree que son coordenadas: primer dígito = fila, segundo dígito = columna." data-he="על חפץ נמצאו זוגות מספרים. המעבדה חושבת שמדובר בקואורדינטות: הספרה הראשונה = שורה, השנייה = עמודה."></p>
+    <div id="polygrid" class="code" style="white-space:pre;line-height:1.65"></div>
+    <p><b data-es="Código encontrado:" data-he="הקוד שנמצא:"></b></p>
+    <div id="polycode" class="code"></div>
+    <p data-es="¿Qué palabra forma?" data-he="איזו מילה מתקבלת?"></p>
+    <div class="inputrow"><input id="a5"><button onclick="check(5)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m5" class="msg"></div>
+    <button class="secondary" onclick="hint(5)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h5" class="clue hidden" data-es="Por ejemplo, 15 es la letra que está en fila 1, columna 5. En español I/J comparten casilla." data-he="למשל, 33 היא האות שנמצאת בשורה 3, עמודה 3."></div>
+  </section>
+
+  <section id="stage6" class="card hidden">
+    <h2 data-es="6. El documento dañado" data-he="6. המסמך הפגום"></h2>
+    <p data-es="El escáner perdió exactamente un carácter al comienzo de cada línea. Restauren el texto. El mensaje verdadero no está en las frases, sino en los caracteres que faltan, leídos en orden." data-he="הסורק מחק בדיוק תו אחד בתחילת כל שורה. שחזרו את הטקסט. המסר האמיתי אינו במשפטים, אלא בתווים החסרים, לפי הסדר."></p>
+    <div class="quote" id="acrostic"></div>
+    <p data-es="¿Qué palabra forman los caracteres perdidos?" data-he="איזו מילה יוצרות האותיות החסרות?"></p>
+    <div class="inputrow"><input id="a6"><button onclick="check(6)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m6" class="msg"></div>
+    <button class="secondary" onclick="hint(6)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h6" class="clue hidden" data-es="Cada línea debe comenzar con una palabra española normal. Anoten solo la letra que falta en cada una." data-he="כל שורה צריכה להתחיל במילה עברית תקינה. רשמו רק את האות החסרה בכל שורה."></div>
+  </section>
+
+
+  <section id="stage7" class="card hidden">
+    <h2 data-es="7. PRUEBA EN RUTA — La regularidad de Afula" data-he="7. משימת דרך — הסדירות של עפולה"></h2>
+    <p><b data-es="Esta prueba no se puede resolver mirando solamente la pantalla." data-he="את המשימה הזאת אי אפשר לפתור רק מהמסך."></b></p>
+    <p data-es="Esperen a estar en el tramo común por la Ruta 65, en dirección a Afula. En los carteles grandes busquen el mismo destino escrito en hebreo, árabe e inglés: עפולה / عفولة / Afula." data-he="חכו עד שתהיו בקטע המשותף בכביש 65 לכיוון עפולה. בשלטים הגדולים חפשו את אותו יעד בעברית, בערבית ובאנגלית: עפולה / عفولة / Afula."></p>
+    <p data-es="Cuenten cuántas letras tiene el nombre en CADA idioma. Hay una regularidad. Multipliquen los tres números entre sí." data-he="ספרו כמה אותיות יש בשם בכל אחת משלוש השפות. יש כאן סדירות. הכפילו את שלושת המספרים זה בזה."></p>
+    <p><b data-es="¿Cuál es el resultado?" data-he="מה התוצאה?"></b></p>
+    <div class="inputrow"><input id="a7" inputmode="numeric"><button onclick="check(7)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m7" class="msg"></div>
+    <button class="secondary" onclick="hint(7)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h7" class="clue hidden" data-es="No importa cómo suenen las palabras: cuenten caracteres visibles. El patrón es el mismo en las tres versiones." data-he="לא משנה איך המילים נשמעות: ספרו את האותיות הנראות. הדפוס זהה בשלוש השפות."></div>
+    <button class="secondary" onclick="roadBypass(7)" data-es="Waze nos desvió / ya lo pasamos (-1 🍋)" data-he="Waze הסיטה אותנו / כבר עברנו (-1 🍋)"></button>
+    <p class="small" data-es="Solo los pasajeros. El conductor no participa en la búsqueda visual." data-he="רק הנוסעים. הנהג אינו משתתף בחיפוש החזותי."></p>
+  </section>
+
+  <section id="stage8" class="card hidden">
+    <h2 data-es="8. PRUEBA EN RUTA — El código de las carreteras" data-he="8. משימת דרך — קוד הכבישים"></h2>
+    <p data-es="Desde el tramo común hacia Gan Ner, presten atención a los números rojos de las rutas principales. Ignoren calles locales y ramales pequeños." data-he="מהקטע המשותף לכיוון גן נר, שימו לב למספרים האדומים של הכבישים הראשיים. התעלמו מרחובות מקומיים ומכבישי גישה קטנים."></p>
+    <p data-es="Tienen que identificar, en orden, las tres rutas principales del tramo final: la que cruza el valle hacia Afula, la que los lleva hacia el cruce de Yizre’el y la que finalmente pasa por Gan Ner." data-he="עליכם לזהות לפי הסדר את שלושת הכבישים הראשיים בקטע הסופי: הכביש שחוצה את העמק לכיוון עפולה, הכביש שמוביל לצומת יזרעאל והכביש שעובר לבסוף ליד גן נר."></p>
+    <p data-es="Anoten los tres números y súmenlos." data-he="רשמו את שלושת המספרים וחברו אותם."></p>
+    <p><b data-es="¿Cuál es la suma?" data-he="מהו הסכום?"></b></p>
+    <div class="inputrow"><input id="a8" inputmode="numeric"><button onclick="check(8)" data-es="Comprobar" data-he="בדיקה"></button></div>
+    <div id="m8" class="msg"></div>
+    <button class="secondary" onclick="hint(8)" data-es="Pedir pista (-1 🍋)" data-he="רמז (-1 🍋)"></button>
+    <div id="h8" class="clue hidden" data-es="Son tres números de ruta. El primero tiene dos cifras, el segundo tres y el tercero dos." data-he="מדובר בשלושה מספרי כביש. לראשון שתי ספרות, לשני שלוש ולשלישי שתי ספרות."></div>
+    <button class="secondary" onclick="roadBypass(8)" data-es="Waze nos desvió / no vimos los carteles (-1 🍋)" data-he="Waze הסיטה אותנו / לא ראינו את השלטים (-1 🍋)"></button>
+    <p class="small" data-es="No hace falta frenar ni fotografiar nada. Basta con que los pasajeros miren los carteles." data-he="אין צורך לעצור או לצלם. מספיק שהנוסעים ישימו לב לשלטים."></p>
+  </section>
+
+  <section id="stage9" class="card hidden">
+    <h2 data-es="7. Archivo final de sospechosos" data-he="7. תיק החשודים הסופי"></h2>
+    <p data-es="Ahora sí. Comparen las pistas que fueron guardando con las fichas completas." data-he="עכשיו כן. השוו את כל הרמזים ששמרתם עם פרטי החשודים המלאים."></p>
+
+    <div class="notebook">
+      <h3 data-es="Pistas reunidas" data-he="הרמזים שנאספו"></h3>
+      <ol id="clueList"></ol>
+    </div>
+
+    <div class="suspects" id="suspects"></div>
+
+    <h3 data-es="Interrogatorio" data-he="חקירה"></h3>
+    <p><b data-es="La policía comprobó dos cosas:" data-he="המשטרה הוכיחה שני דברים:"></b></p>
+    <p data-es="1) De estas tres declaraciones, exactamente UNA es falsa. 2) El asesino fue precisamente quien mintió." data-he="1) מתוך שלוש ההצהרות, בדיוק אחת שקרית. 2) הרוצח הוא בדיוק מי ששיקר."></p>
+
+    <div class="quote" data-es="🧂 Doctor Sal: «La noche del crimen yo llevaba sombrero.»" data-he="🧂 ד״ר מלח: ״בליל הפשע חבשתי כובע.״"></div>
+    <div class="quote" data-es="🍬 Señor Azúcar: «Yo jamás uso bufanda.»" data-he="🍬 מר סוכר: ״אני אף פעם לא לובש צעיף.״"></div>
+    <div class="quote" data-es="🥤 Profesor Soda: «Soy zurdo. Todo el mundo lo sabe.»" data-he="🥤 פרופסור סודה: ״אני שמאלי. כולם יודעים את זה.״"></div>
+
+    <p class="small" data-es="No alcanza con encontrar a alguien compatible con las pistas: también tienen que descubrir quién mintió." data-he="לא מספיק למצוא חשוד שמתאים לרמזים: צריך גם לזהות מי שיקר."></p>
+    <button onclick="nextStage()" data-es="Presentar acusación" data-he="להגיש כתב אישום"></button>
+  </section>
+
+  <section id="stage10" class="card hidden">
+    <h2 data-es="⚖️ Acusación final" data-he="⚖️ כתב האישום הסופי"></h2>
+    <p data-es="Completen las tres respuestas. No hay premio por acusar a un inocente; hay abogados." data-he="השלימו את שלוש התשובות. אין פרס על האשמת חף מפשע; יש עורכי דין."></p>
+
+    <label><b data-es="1. ¿Quién es el asesino?" data-he="1. מי הרוצח?"></b></label>
+    <select id="culprit">
+      <option value="">—</option>
+      <option value="menta">Doña Menta / גברת נענע</option>
+      <option value="sal">Doctor Sal / ד"ר מלח</option>
+      <option value="azucar">Señor Azúcar / מר סוכר</option>
+      <option value="pomelo">Capitán Pomelo / קפטן אשכולית</option>
+      <option value="mandarina">Señora Mandarina / גברת מנדרינה</option>
+      <option value="soda">Profesor Soda / פרופסור סודה</option>
+    </select>
+
+    <br><br>
+    <label><b data-es="2. ¿Cuál fue el arma?" data-he="2. מה היה כלי הרצח?"></b></label>
+    <input id="weapon">
+
+    <br><br>
+    <label><b data-es="3. ¿Cuál fue el motivo?" data-he="3. מה היה המניע?"></b></label>
+    <input id="motive" data-ph-es="Una palabra o idea clave..." data-ph-he="מילת מפתח או רעיון...">
+
+    <br><br>
+    <label><b data-es="4. Código de carretera final" data-he="4. קוד הדרך הסופי"></b></label>
+    <p class="small" data-es="Escriban seguidos, sin guion ni espacio, los dos códigos obtenidos en las pruebas de carretera." data-he="כתבו ברצף, בלי מקף ובלי רווח, את שני הקודים שקיבלתם במשימות הדרך."></p>
+    <input id="roadcode" inputmode="numeric">
+
+    <div class="inputrow"><button onclick="finalCheck()" data-es="Resolver el caso" data-he="לפתור את התיק"></button></div>
+    <div id="finalMsg" class="msg"></div>
+  </section>
+
+  <section id="stage11" class="card hidden finish">
+    <div class="confetti">🍋 🎉 🍋 🎉 🍋</div>
+    <h1 data-es="CASO RESUELTO" data-he="התיק נפתר"></h1>
+    <p data-es="El asesino fue el Señor Azúcar." data-he="הרוצח הוא מר סוכר."></p>
+    <p data-es="Don Limón fue asesinado con un exprimidor. El motivo: una disputa por el negocio de limonada de Gan Ner." data-he="מר לימון נרצח באמצעות מסחטה. המניע: סכסוך סביב עסק הלימונדה של גן נר."></p>
+    <div class="quote" data-es="El Señor Azúcar quería lanzar «Limonada de Gan Ner – 100% natural*». Ya había impreso 500 etiquetas. Don Limón rechazó el acuerdo y le dijo: «Yo ya soy suficientemente dulce sin vos». Azúcar nunca lo superó." data-he="מר סוכר רצה להשיק ״לימונדה מגן נר – 100% טבעית*״. הוא כבר הדפיס 500 תוויות. מר לימון סירב לעסקה ואמר לו: ״אני מספיק מתוק גם בלעדיך״. סוכר מעולם לא התאושש מזה."></div>
+    <p class="small" data-es="*Excepto el azúcar, los conservantes y el departamento de marketing." data-he="*חוץ מהסוכר, החומרים המשמרים ומחלקת השיווק."></p>
+    <h2 id="prize"></h2>
+    <p data-es="Presenten esta pantalla al llegar. La dueña del árbol conserva el derecho soberano de revisar la sentencia." data-he="הציגו את המסך הזה כשתגיעו. לבעלת העץ שמורה הזכות הריבונית לערער על גזר הדין."></p>
+    <button class="secondary" onclick="resetGame()" data-es="Reiniciar juego" data-he="להתחיל מחדש"></button>
+  </section>
+</div>
+
+<script>
+const GAME_VERSION = 'v7_inicio_limpio';
+
+if(localStorage.getItem('limonGameVersion') !== GAME_VERSION){
+  localStorage.setItem('limonGameVersion', GAME_VERSION);
+  localStorage.removeItem('limonStage');
+  localStorage.removeItem('limonLemons');
+  localStorage.removeItem('limonHinted');
+}
+
+let lang = localStorage.getItem('limonLang') || 'es';
+let stage = parseInt(localStorage.getItem('limonStage') || '0',10);
+let lemons = parseInt(localStorage.getItem('limonLemons') || '12',10);
+let hinted = JSON.parse(localStorage.getItem('limonHinted') || '{}');
+
+const clues = {
+  es:[
+    "El asesino llevaba anteojos.",
+    "El automóvil del asesino NO era rojo.",
+    "El asesino es diestro.",
+    "El asesino estaba tomando una bebida fría.",
+    "Arma: un exprimidor.",
+    "El motivo está relacionado con una limonada.",
+    "Código de carretera I: 125.",
+    "Código de carretera II: 800."
+  ],
+  he:[
+    "הרוצח הרכיב משקפיים.",
+    "הרכב של הרוצח לא היה אדום.",
+    "הרוצח ימני.",
+    "הרוצח שתה משקה קר.",
+    "כלי הרצח: מסחטה.",
+    "המניע קשור ללימונדה.",
+    "קוד דרך I: 125.",
+    "קוד דרך II: 800."
+  ]
+};
+
+const suspectData = {
+  es:[
+    ["🌿 Doña Menta","Sin anteojos","Auto blanco","Diestra","Té caliente","Bufanda"],
+    ["🧂 Doctor Sal","Anteojos","Auto azul","Diestro","Agua fría","Sombrero"],
+    ["🍬 Señor Azúcar","Anteojos","Auto blanco","Diestro","Gaseosa fría","Bufanda"],
+    ["🍊 Capitán Pomelo","Anteojos","Auto rojo","Zurdo","Té caliente","Sombrero"],
+    ["🍊 Señora Mandarina","Sin anteojos","Auto azul","Zurda","Agua fría","Bufanda"],
+    ["🥤 Profesor Soda","Anteojos","Auto rojo","Zurdo","Gaseosa fría","Sombrero"]
+  ],
+  he:[
+    ["🌿 גברת נענע","בלי משקפיים","רכב לבן","ימנית","תה חם","צעיף"],
+    ["🧂 ד״ר מלח","משקפיים","רכב כחול","ימני","מים קרים","כובע"],
+    ["🍬 מר סוכר","משקפיים","רכב לבן","ימני","משקה מוגז קר","צעיף"],
+    ["🍊 קפטן אשכולית","משקפיים","רכב אדום","שמאלי","תה חם","כובע"],
+    ["🍊 גברת מנדרינה","בלי משקפיים","רכב כחול","שמאלית","מים קרים","צעיף"],
+    ["🥤 פרופסור סודה","משקפיים","רכב אדום","שמאלי","משקה מוגז קר","כובע"]
+  ]
+};
+
+function norm(s){
+  return (s||"").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^\p{L}\p{N}]+/gu," ").trim();
+}
+function save(){
+  localStorage.setItem('limonLang',lang);
+  localStorage.setItem('limonStage',stage);
+  localStorage.setItem('limonLemons',lemons);
+  localStorage.setItem('limonHinted',JSON.stringify(hinted));
+}
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang==='he' ? 'rtl':'ltr';
+  document.querySelectorAll('[data-es]').forEach(el=>{
+    el.textContent = el.getAttribute('data-'+lang);
+  });
+  document.querySelectorAll('[data-ph-es]').forEach(el=>{
+    el.placeholder = el.getAttribute('data-ph-'+lang);
+  });
+  document.getElementById('langBtn').textContent = lang==='es' ? 'עברית' : 'Español';
+  document.getElementById('alphabet').textContent = lang==='es'
+    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    : 'אבגדהוזחטיכלמנסעפצקרשת';
+  document.getElementById('caesar').textContent = lang==='es' ? 'QCTL' : 'חט';
+
+  document.getElementById('polygrid').textContent = lang==='es'
+    ? '    1  2  3  4  5\n1   A  B  C  D  E\n2   F  G  H I/J K\n3   L  M  N  O  P\n4   Q  R  S  T  U\n5   V  W  X  Y  Z'
+    : '    1  2  3  4  5\n1   א  ב  ג  ד  ה\n2   ו  ז  ח  ט  י\n3   כ  ל  מ  נ  ס\n4   ע  פ  צ  ק  ר\n5   ש  ת  ·  ·  ·';
+  document.getElementById('polycode').textContent = lang==='es'
+    ? '15 – 53 – 35 – 42 – 24 – 32 – 24 – 14 – 34 – 42'
+    : '33 – 35 – 23 – 24 – 15';
+
+  document.getElementById('acrostic').innerHTML = lang==='es'
+    ? '___a coartada llegó demasiado tarde.<br>___ncluso el camarero cambió su versión.<br>___ientras todos discutían, alguien llamó.<br>___tro testigo oyó la palabra “contrato”.<br>___adie quiso firmar la declaración.<br>___lguien ya había invertido dinero.<br>___etrás del conflicto había un producto.<br>___unque parecía absurdo, ese producto explica el crimen.'
+    : '___א כל עד סיפר אותו דבר.<br>___ש מי ששמע ויכוח על כסף.<br>___ישהו כבר השקיע בעסק.<br>___בדיוק אז נשמעה צעקה מהמטבח.<br>___ראה שהוויכוח היה על מוצר.<br>___ווקא הקורבן סירב לשתף פעולה.<br>___כול התחיל ממשקה תמים.';
+  renderNotebook();
+  renderSuspects();
+  renderPrize();
+
+  // Update any clue card already revealed
+  for(let n=1;n<=8;n++){
+    const rt = document.getElementById('revealText'+n);
+    if(rt){
+      const idx = n-1;
+      rt.textContent = clues[lang][idx];
+      const box = document.getElementById('reveal'+n);
+      if(box){
+        const title = box.children[0];
+        const btn = box.querySelector('button');
+        if(title) title.textContent = lang==='es' ? '🔎 PISTA OBTENIDA' : '🔎 הרמז שהתקבל';
+        if(btn) btn.textContent = lang==='es' ? 'Guardar pista y continuar' : 'לשמור את הרמז ולהמשיך';
+      }
+    }
+  }
+}
+function render(){
+  for(let i=0;i<=11;i++){
+    document.getElementById('stage'+i).classList.toggle('hidden', i!==stage);
+  }
+  document.getElementById('lemons').textContent='🍋 '+lemons;
+  document.getElementById('progress').style.width = Math.min(100,(stage/11)*100)+'%';
+  applyLang();
+  save();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextStage(){ stage=Math.min(11,stage+1); render(); }
+
+function good(n, clueIndex){
+  const input = document.getElementById('a'+n);
+  if(input) input.disabled = true;
+
+  const msg = document.getElementById('m'+n);
+  msg.className='msg ok';
+  msg.textContent = lang==='es'
+    ? '¡Correcto! Ahora lean y guarden esta pista:'
+    : 'נכון! עכשיו קראו ושמרו את הרמז הבא:';
+
+  let box = document.getElementById('reveal'+n);
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'reveal'+n;
+    box.className = 'clue';
+    box.style.marginTop = '14px';
+    box.style.borderLeftWidth = '7px';
+
+    const title = document.createElement('div');
+    title.style.fontWeight = '800';
+    title.style.marginBottom = '8px';
+    title.textContent = lang==='es' ? '🔎 PISTA OBTENIDA' : '🔎 הרמז שהתקבל';
+
+    const text = document.createElement('div');
+    text.id = 'revealText'+n;
+    text.style.fontSize = '1.08rem';
+    text.style.lineHeight = '1.5';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.style.marginTop = '12px';
+    btn.onclick = function(){
+      stage++;
+      render();
+    };
+    btn.setAttribute('data-es','Guardar pista y continuar');
+    btn.setAttribute('data-he','לשמור את הרמז ולהמשיך');
+    btn.textContent = lang==='es' ? 'Guardar pista y continuar' : 'לשמור את הרמז ולהמשיך';
+
+    box.appendChild(title);
+    box.appendChild(text);
+    box.appendChild(btn);
+    msg.insertAdjacentElement('afterend', box);
+  }
+
+  document.getElementById('revealText'+n).textContent = clues[lang][clueIndex];
+
+  // Hide normal check/hint controls so the clue becomes the focus
+  const section = document.getElementById('stage'+n);
+  const hintBtn = Array.from(section.querySelectorAll('button.secondary')).find(b => b.getAttribute('onclick') === 'hint('+n+')');
+  if(hintBtn) hintBtn.classList.add('hidden');
+
+  const checkBtn = Array.from(section.querySelectorAll('button')).find(b => b.getAttribute('onclick') === 'check('+n+')');
+  if(checkBtn) checkBtn.disabled = true;
+
+  save();
+}
+function bad(n){
+  const el=document.getElementById('m'+n);
+  el.className='msg bad';
+  const msgsEs=["No. Don Limón merece una investigación mejor.","Incorrecto. Waze recalculando...","No coincide con la evidencia.","Todavía no. Revisen sin entrar en pánico cítrico."];
+  const msgsHe=["לא. למר לימון מגיעה חקירה טובה יותר.","לא נכון. Waze מחשבת מסלול מחדש...","זה לא תואם את הראיות.","עדיין לא. נסו שוב בלי פאניקה הדרית."];
+  const arr=lang==='es'?msgsEs:msgsHe;
+  el.textContent=arr[Math.floor(Math.random()*arr.length)];
+}
+function check(n){
+  const v=norm(document.getElementById('a'+n).value);
+  if(n===1){ return v==='795' ? good(1,0):bad(1); }
+  if(n===2){ return v==='92' ? good(2,1):bad(2); }
+  if(n===3){
+    const ok=['ana','אנה'].includes(v);
+    return ok ? good(3,2):bad(3);
+  }
+  if(n===4){
+    const ok=['fria','frio','קר','קרה'].includes(v);
+    return ok ? good(4,3):bad(4);
+  }
+  if(n===5){
+    const ok=['exprimidor','exprimidor de limones','מסחטה','מסחטת לימון','מסחטת לימונים'].includes(v);
+    return ok ? good(5,4):bad(5);
+  }
+  if(n===6){
+    const ok=['limonada','לימונדה'].includes(v);
+    return ok ? good(6,5):bad(6);
+  }
+  if(n===7){ return v==='125' ? good(7,6):bad(7); }
+  if(n===8){ return v==='800' ? good(8,7):bad(8); }
+}
+function hint(n){
+  if(!hinted[n]){
+    lemons=Math.max(0,lemons-1); hinted[n]=true; save();
+  }
+  document.getElementById('h'+n).classList.remove('hidden');
+  document.getElementById('lemons').textContent='🍋 '+lemons;
+}
+function roadBypass(n){
+  const key='bypass'+n;
+  if(!hinted[key]){
+    lemons=Math.max(0,lemons-1);
+    hinted[key]=true;
+  }
+  if(n===7) document.getElementById('a7').value='125';
+  if(n===8) document.getElementById('a8').value='800';
+  document.getElementById('lemons').textContent='🍋 '+lemons;
+  save();
+  check(n);
+}
+function renderNotebook(){
+  const list=document.getElementById('clueList');
+  if(!list)return;
+  list.innerHTML='';
+  const arr=clues[lang];
+  arr.forEach(x=>{const li=document.createElement('li');li.textContent=x;list.appendChild(li);});
+}
+function renderSuspects(){
+  const box=document.getElementById('suspects');
+  if(!box)return;
+  box.innerHTML='';
+  suspectData[lang].forEach(s=>{
+    const d=document.createElement('div'); d.className='suspect';
+    d.innerHTML='<b>'+s[0]+'</b><br><span class="small">'+s.slice(1).join(' · ')+'</span>';
+    box.appendChild(d);
+  });
+}
+function finalCheck(){
+  const c=document.getElementById('culprit').value;
+  const w=norm(document.getElementById('weapon').value);
+  const m=norm(document.getElementById('motive').value);
+  const rc=norm(document.getElementById('roadcode').value);
+  const weaponOK=['exprimidor','exprimidor de limones','מסחטה','מסחטת לימון','מסחטת לימונים'].includes(w);
+  const motiveOK = m.includes('limonada') || m.includes('לימונדה') || m.includes('negocio') || m.includes('עסק') || m.includes('dinero') || m.includes('כסף');
+  const msg=document.getElementById('finalMsg');
+  const roadOK = rc==='125800';
+  if(c==='azucar' && weaponOK && motiveOK && roadOK){
+    msg.className='msg ok';
+    msg.textContent=lang==='es'?'Acusación aceptada. Caso resuelto.':'כתב האישום התקבל. התיק נפתר.';
+    setTimeout(()=>{stage=11;render();},900);
+  }else{
+    msg.className='msg bad';
+    msg.textContent=lang==='es'
+      ? 'La fiscalía rechaza la acusación. Revisen todas las pistas, quién mintió y los dos códigos obtenidos en la carretera.'
+      : 'התביעה דוחה את כתב האישום. בדקו את כל הרמזים, מי שיקר ואת שני קודי הדרך.';
+  }
+}
+function renderPrize(){
+  const p=document.getElementById('prize');
+  if(!p)return;
+  p.textContent = lang==='es'
+    ? '🏆 Premio final: '+lemons+' limones'
+    : '🏆 הפרס הסופי: '+lemons+' לימונים';
+}
+function resetGame(){
+  if(confirm(lang==='es'?'¿Reiniciar todo el juego?':'להתחיל את כל המשחק מחדש?')){
+    stage=0;lemons=12;hinted={};
+    ['limonStage','limonLemons','limonHinted'].forEach(k=>localStorage.removeItem(k));
+    localStorage.setItem('limonGameVersion', GAME_VERSION);
+    render();
+  }
+}
+document.getElementById('langBtn').addEventListener('click',()=>{
+  lang=lang==='es'?'he':'es'; applyLang(); save();
+});
+render();
+</script>
+</body>
+</html>
